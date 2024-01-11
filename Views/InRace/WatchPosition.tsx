@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Alert, Button, PermissionsAndroid } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
+import LogService from '../../Services/LogService'
 
-export default function WatchPositionExample() {
+export default function WatchPosition() {
 
-  const hasPermission = async () => {
+  /*const hasPermission = async () => {
     try {
       const granted = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.ACCESS_BACKGROUND_LOCATION
@@ -20,7 +21,7 @@ export default function WatchPositionExample() {
     } catch (error) {
       console.error('Error checking geolocation permission:', error);
     }
-  };
+  };*/
 
   const watchPosition = () => {
       //check that subscriptionId is clear
@@ -29,12 +30,20 @@ export default function WatchPositionExample() {
         }
 
        //very permissions
-      if (hasPermission()){
+      //if (hasPermission()){
             try {
             //get watch subscription id
               const watchID = Geolocation.watchPosition(
                 (position) => {
                   console.log('watchPosition', JSON.stringify(position));
+                  const metadata=[1,1,position.coords.longitude,position.coords.latitude,position.coords.altitude]
+                  const logData={
+                          datetime:Date.now(),
+                          type:'Log',
+                          module:'Runner',
+                          metadata:metadata,
+                          message:"Test"};
+                  LogService.createLog(logData);
                   setPosition(position);
                 },
                 (error) => Alert.alert('WatchPosition Error', JSON.stringify(error)),
@@ -46,9 +55,9 @@ export default function WatchPositionExample() {
             } catch (error) {
               Alert.alert('WatchPosition Error', JSON.stringify(error));
             }
-      }
+      /*}
       else{
-      console.log("else");}
+      console.log("else");}*/
 
 
   };

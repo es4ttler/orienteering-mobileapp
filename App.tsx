@@ -26,7 +26,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import WatchPosition from './Views/WatchPosition'
+import InRaceScreen from './Views/InRace/InRaceScreen';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -76,7 +76,8 @@ function App(): React.JSX.Element {
         style={backgroundStyle}>
         <>
             {/*AppState.currentState === 'active' && */
-            <WatchPosition />
+            <InRaceScreen/>
+
             }
         </>
       </ScrollView>
