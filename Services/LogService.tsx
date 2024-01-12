@@ -4,6 +4,7 @@ const BASE_URL = 'https://orienteering-backend.onrender.com/log';
 
 const LogService = {
   createLog: async (logData) => {
+  console.log(logData);
     try {
 
       const response = await axios.post(`${BASE_URL}/createLog`, logData);

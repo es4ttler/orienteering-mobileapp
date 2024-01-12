@@ -21,6 +21,7 @@ const getCurrentLocation = (dataScanned) => {
     },
     (error) => {
       console.error('Error getting current location:', error);
+      Alert.alert("Some issue getting location, please retry");
     },
     { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
   );
@@ -79,7 +80,7 @@ const onScanSuccess = (e) => {
         />
       ) : (
         <View style={styles.resultContainer}>
-          <Text style={styles.resultData}>{scannedData}</Text>
+          <Text style={styles.resultData}>{scannedData ? `Dernière balise scannée : ${scannedData}` : null}</Text>
           <TouchableOpacity style={styles.buttonTouchable} onPress={handlePressScanAgain}>
             <Text style={styles.buttonText}>Scanner la balise</Text>
           </TouchableOpacity>

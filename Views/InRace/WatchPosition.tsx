@@ -5,32 +5,11 @@ import LogService from '../../Services/LogService'
 
 export default function WatchPosition() {
 
-  /*const hasPermission = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_BACKGROUND_LOCATION
-      );
-
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log('Geolocation permission already granted');
-        return true;
-      } else {
-        console.log('Geolocation permission not granted');
-        return false;
-      }
-    } catch (error) {
-      console.error('Error checking geolocation permission:', error);
-    }
-  };*/
-
   const watchPosition = () => {
       //check that subscriptionId is clear
       if (subscriptionId!==null){
             clearWatch();
         }
-
-       //very permissions
-      //if (hasPermission()){
             try {
             //get watch subscription id
               const watchID = Geolocation.watchPosition(
@@ -41,7 +20,11 @@ export default function WatchPosition() {
                           datetime:Date.now(),
                           type:'Log',
                           module:'Runner',
-                          metadata:metadata,
+                          id_race:1,
+                          id_runner:1,
+                          longitude:position.coords.longitude,
+                          latitude:position.coords.latitude,
+                          altitude:position.coords.altitude,
                           message:"Test"};
                   LogService.createLog(logData);
                   setPosition(position);
@@ -55,11 +38,6 @@ export default function WatchPosition() {
             } catch (error) {
               Alert.alert('WatchPosition Error', JSON.stringify(error));
             }
-      /*}
-      else{
-      console.log("else");}*/
-
-
   };
 
   const clearWatch = () => {

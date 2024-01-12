@@ -17,6 +17,7 @@ const isGranted  = checkAllPermissions();
                <Text>Lastname Firstname</Text>
                <Text>Bib number</Text>
                <WatchPosition />
+               <Text></Text>
                <QRCodeScannerScreen />
              </>
            ) }
